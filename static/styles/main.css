@@ -10,7 +10,7 @@ body{
 #deleteLink{
     color: #000;
     margin-left: 50%;
-
+    text-decoration: underline;
 }
 
 #headerDiv{

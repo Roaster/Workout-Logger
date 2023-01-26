@@ -19,7 +19,7 @@
     <div id="headerDiv">
     <ul>
         {% for workout in workouts %}
-        <li>{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps. ({{workout.id}})
+        <li>{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps.
         <a id="deleteLink" href="delete/{{workout.id}}">Delete</a> 
         </li>
         {% endfor %}
