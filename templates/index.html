@@ -5,23 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Workout Logger</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
 </head>
+
 <body>
-    <div><h1>Workout Logger</h1>
-
-    <script>
-        if ('{{message}}' != 'None'){
-            
-            console.log('{{workouts}}')
-
-        }
+    
+    <div id="NavBar">
+        <ul id="NavUl">
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/workouts">Workouts</a></li>
+        </ul>
         
-        
-    </script>
+    </div>
 
+    <div id="headerDiv">
+   
+    <div id="innerText">
+    <h1>Workout Logger</h1>
     <p>Enter the workout you did below:
-    <br>
-        <form action="#" method="post">
+        <form id="form" action="#" method="post">
             <label for="workout">Select Workout:</label><br>
             <select id="workout" name="workout">
                 <option value="bench">Bench</option>
@@ -37,14 +40,14 @@
             <input type="text" id="reps" name="reps" placeholder="10" required><br>
 
             <div>
-                <input type="submit">
-            </div>
-            <div>
+                <input type="submit"> 
                 <input type="reset">
             </div>
         </form>
     </p>
     </div>
+    </div>
+    
 
 </body>
 </html>

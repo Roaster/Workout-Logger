@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workouts</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+</head>
+<body>
+    <div id="NavBar">
+        <ul id="NavUl">
+            <li><a href="/">Home</a></li>
+            <li><a href="/users">Users</a></li>
+            <li><a href="/workouts">Workouts</a></li>
+        </ul>
+        
+    </div>
+    <div id="headerDiv">
+    <ul>
+        {% for workout in workouts %}
+        <li>{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps. ({{workout.id}})
+        <a id="deleteLink" href="delete/{{workout.id}}">Delete</a> 
+        </li>
+        {% endfor %}
+        
+    </ul>
+   
+    </div>
+</body>
+</html>

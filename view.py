@@ -1,6 +1,11 @@
 from flask import Blueprint, render_template,request
 
+
 views = Blueprint(__name__, "views")
+
+
+from app import User, db
+
 
 workouts = []
 @views.route("/", methods=['GET', 'POST'])
@@ -17,6 +22,15 @@ def home():
     else:
         return render_template("index.html", message = 'None')
 
+
+@views.route("/create", methods=['GET', 'POST'])
+def create():
+    new_user = User(username="Brandon")
+    db.session.add(new_user)
+    
+    db.session.commit()
+    
+    return "Account Created"
 
 
 @views.route("/info")
