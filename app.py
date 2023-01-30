@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask import Blueprint, render_template, request, redirect, url_for
+import json
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -38,7 +39,8 @@ def home():
         workout = str(request.form['workout'])
         weight = str(request.form['weight'])
         reps = str(request.form['reps'])
-        newWorkout = Workout(workout=workout, weight=weight, reps=reps, username="Brandon")
+        username = str(request.form['username'])
+        newWorkout = Workout(workout=workout, weight=weight, reps=reps, username=username)
         db.session.add(newWorkout)
         db.session.commit()
 
@@ -84,19 +86,21 @@ def deleteId(id):
     return redirect('/workouts')
 
 #Shows all the workouts in the Workout table
-@views.route("/workouts")
-def workouts():
-    foundWorkouts = Workout.query.all()
-    workouts = ""
-
-    for workout  in foundWorkouts:
-        newWorkout = str(workout.weight) + " " + workout.workout + " " + str(workout.reps) +  workout.username +"<br/>"
-        workouts += newWorkout
-    return render_template("workouts.html", workouts = foundWorkouts)
+#Gather the users and all the stored workouts to send to the workouts page
+@views.route("/workouts", defaults = {'username':None})
+@views.route("/workouts/<username>")
+def workouts(username):
+    
+    if username:
+        foundWorkouts = Workout.query.filter(Workout.username == username)
+    else:
+        foundWorkouts = Workout.query.all()
+    users = User.query.all()
+    return render_template("workouts.html", workouts = foundWorkouts, users=users)
 
 @views.route("/info")
 def info():
-    return "Welcome to the info page. This application was built to practice web development."
+    return "Welcome to the info page."
 
 if __name__=='__main__':
     app1 = create_app()

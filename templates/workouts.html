@@ -17,15 +17,73 @@
         
     </div>
     <div id="headerDiv">
-    <ul>
+        <label>Select a user to sort by: </label>
+        <select name="Users" class="userSelect" id="sUser">
+            <option value="all">All</option>
+            {% for user in users %}
+            <option value={{user.username}}>{{user.username}}</option>
+            {% endfor %}
+        </select>
+    <ul id="myUl">
         {% for workout in workouts %}
-        <li>{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps.
+        <li id="workoutItem">{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps.
         <a id="deleteLink" href="delete/{{workout.id}}">Delete</a> 
         </li>
         {% endfor %}
-        
     </ul>
    
     </div>
+    <!-- THIS NEEDS WORK -->
+    <script type="text/javascript">
+        const items = document.querySelectorAll("[id=workoutItem]");
+        const selectUser = document.querySelector(".userSelect")
+        selectUser.addEventListener('change', (event) => {
+            var user = document.getElementById("sUser");
+            var ul = document.getElementById("myUl")
+
+            for(let i =0; i<items.length; ++i){
+                ul.appendChild(items[i])
+            }
+            
+            
+            for (let i = 0; i < items.length; ++i){
+                console.log(user.value)
+                if(user.value == "all"){
+                    continue;
+                }
+                else if(!items[i].innerText.includes(user.value)){
+                    items[i].remove()
+
+                }
+                
+                // .remove()
+            }
+            
+            console.log(items)
+            
+            for(let i = 0; i < "{{workoutsLen}}"; ++i){
+                console.log("{{workouts[i]}}");
+            }
+            
+            
+            var workouts = "{{workouts}}"
+            
+            
+
+            for (let i = 0; i < workouts.length; ++i){
+                if(workouts[i].username == user){
+                    newWorkout = workouts[i].username + ":" + workouts[i].workout + "at" + workouts[i].weight + "pounds and" + workouts[i].reps + "reps."
+                    
+                }
+            }
+
+            
+           
+            
+        // const result = document.querySelector('.result');
+        //  result.textContent = `You like ${event.target.value}`;
+        });
+
+    </script>
 </body>
 </html>
