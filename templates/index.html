@@ -10,14 +10,9 @@
 
 <body>
     
-    <div id="NavBar">
-        <ul id="NavUl">
-            <li><a href="/">Home</a></li>
-            <li><a href="/users">Users</a></li>
-            <li><a href="/workouts">Workouts</a></li>
-        </ul>
-        
-    </div>
+    {% include 'navbar.html' %}
+    {% block content %}
+    {% endblock %}
 
     <div id="headerDiv">
    

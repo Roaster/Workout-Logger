@@ -59,6 +59,11 @@ def create(username):
     
     return username + " Account Created"
 
+@views.route("/login", methods=['GET', 'POST'])
+def login():
+    #if request.method == 'POST':
+    return render_template("login.html")
+
 #Shows all the users in the User table
 @views.route("/users", methods= ['GET', 'POST'])
 def users():
