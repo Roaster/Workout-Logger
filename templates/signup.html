@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users</title>
+    <title>Register</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
 </head>
 <body>
     {% include 'navbar.html' %}
     {% block content %}
     {% endblock %}
-        
-    
+
     <div id="headerDiv">
-        <ul>
-            {% for user in users %}
-            <li> {{user.username}} </li>
-            {% endfor %}
-        </ul>
+        <form method="post">
+            <label for="username">Username</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password</label><br>
+            <input type="password" id="username" name="password"><br>
+            <button type="submit">Sign Up!</button>
+        </form>
     </div>
 </body>
 </html>

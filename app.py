@@ -2,7 +2,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask import Blueprint, render_template, request, redirect, url_for
-import json
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -30,6 +29,7 @@ class Workout(db.Model):
 
 class User(db.Model):
     username = db.Column(db.String(15), primary_key=True)
+    password = db.Column(db.String(15))
     
 
 
@@ -61,8 +61,24 @@ def create(username):
 
 @views.route("/login", methods=['GET', 'POST'])
 def login():
-    #if request.method == 'POST':
+    if request.method == 'POST':
+        username = str(request.form['username'])
+        password = str(request.form['password'])
+        print(username, password)
     return render_template("login.html")
+
+@views.route("/register", methods=["POST", "GET"])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        newUser = User(username=username, password = password)
+        db.session.add(newUser)
+        db.session.commit()
+        return redirect("/")
+
+    return render_template("signup.html")
 
 #Shows all the users in the User table
 @views.route("/users", methods= ['GET', 'POST'])
