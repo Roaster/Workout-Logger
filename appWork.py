@@ -164,7 +164,7 @@ def workouts(username):
 def info():
     return "Welcome to the info page."
 
-# if __name__=='__main__':
-app1 = create_app()
-app1.run(debug=True)
+if __name__=='__main__':
+    app1 = create_app()
+    app1.run(debug=True)
 
