@@ -12,8 +12,16 @@
     {% block content %}
     {% endblock %}
 
+    
     <div id="headerDiv">
         <form method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }} <br>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <label for="username">Username</label><br>
             <input type="text" id="username" name="username"><br>
             <label for="password">Password</label><br>
