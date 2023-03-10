@@ -15,7 +15,7 @@ def create_app():
     db.init_app(app1)
 
     login_manager = LoginManager()
-    login_manager.login_view = '__main__.login'
+    login_manager.login_view = '/login'
     login_manager.init_app(app1)
 
     @login_manager.user_loader
@@ -66,7 +66,7 @@ def home():
         db.session.add(newWorkout)
         db.session.commit()
 
-        return redirect(url_for('__main__.workouts'))
+        return redirect("/")
     else:
         return render_template("index.html", message = 'None', cUser = cUser)
 
