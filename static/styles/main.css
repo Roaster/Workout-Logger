@@ -9,12 +9,13 @@ body{
 
 #deleteLink{
     color: #000;
-    margin-left: 50%;
+    margin-left: 20%;
     text-decoration: underline;
 }
 
 #headerDiv{
-    width: 80%;
+    width: 50%;
+    height: 65%;
     margin:0 auto;
     background-color: white;
     border: 3px black solid;
@@ -27,6 +28,7 @@ body{
 #innerText{
     width:70%;
     margin:0 auto;  
+
 }
 
 #innerText h1{
@@ -40,7 +42,7 @@ body{
     margin:0 auto;
     padding: 12px 0;
     background-color: grey;
-    width: 80%;
+    width: 50%;
     border: 3px black solid;
     box-sizing: border-box;
     border-bottom: none;
@@ -51,7 +53,13 @@ body{
     padding-left: 15px;
     
 }
-
+.workoutInnerText{
+    display: inline-block;
+    width: 75%;
+}
+.workoutDeleteLink{
+    display: inline-block;
+}
 a {
     color: white;
     text-decoration: none;

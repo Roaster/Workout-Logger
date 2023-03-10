@@ -21,24 +21,27 @@
     {% endwith %}
     </div>
     <div id="headerDiv">
-        <label>Select a user to sort by: </label>
+        <!-- Potentially a filter bar -->
+        <!-- <label>Select a user to sort by: </label>
         <select name="Users" class="userSelect" id="sUser">
             <option value="all">All</option>
             {% for user in users %}
             <option value={{user.username}}>{{user.username}}</option>
             {% endfor %}
-        </select>
+        </select> -->
+
     <ul id="myUl">
         {% for workout in workouts %}
-        <li id="workoutItem">{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps.
-        <a id="deleteLink" href="delete/{{workout.id}}">Delete</a> 
+        <li id="workoutItem">
+        <div class="workoutInnerText">{{workout.username}}: {{workout.workout}} at {{workout.weight}} pounds and {{workout.reps}} reps.</div>
+        <div class="workoutDeleteLink"><a id="deleteLink" href="delete/{{workout.id}}">Delete</a> </div>
         </li>
         {% endfor %}
     </ul>
    
     </div>
-    <!-- THIS NEEDS WORK -->
-    <script type="text/javascript">
+    <!-- THIS NEEDS WORK Removed for now-->
+    <!-- <script type="text/javascript">
         const items = document.querySelectorAll("[id=workoutItem]");
         const selectUser = document.querySelector(".userSelect")
         selectUser.addEventListener('change', (event) => {
@@ -88,6 +91,6 @@
         //  result.textContent = `You like ${event.target.value}`;
         });
 
-    </script>
+    </script> -->
 </body>
 </html>
