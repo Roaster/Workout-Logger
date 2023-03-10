@@ -164,7 +164,8 @@ def workouts():
 def info():
     return "Welcome to the info page."
 
+app1 = create_app()
+
 if __name__=='__main__':
-    app1 = create_app()
     app1.run(debug=True)
 
