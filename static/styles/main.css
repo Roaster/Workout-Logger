@@ -20,6 +20,7 @@ body{
     background-color: white;
     border: 3px black solid;
     box-sizing: border-box;
+    
 }
 #form{
     display: block;
