@@ -55,20 +55,19 @@ class User(UserMixin, db.Model):
 #The home page
 @views.route("/", methods=['GET', 'POST'])
 def home():
+    cUser = getCurrentUser()
     if request.method == "POST":
+        if cUser == None:
+            return redirect(url_for('__main__.home'))
         workout = str(request.form['workout'])
         weight = str(request.form['weight'])
         reps = str(request.form['reps'])
-        # username = str(request.form['username'])
-        newWorkout = Workout(workout=workout, weight=weight, reps=reps, username=current_user.username)
+        newWorkout = Workout(workout=workout, weight=weight, reps=reps, username=cUser)
         db.session.add(newWorkout)
         db.session.commit()
 
-        message = "You did " + workout + " at " + weight + " pounds for " + reps + " reps"
         return redirect(url_for('__main__.workouts'))
-        # render_template("index.html", message=message)
     else:
-        cUser = getCurrentUser()
         return render_template("index.html", message = 'None', cUser = cUser)
 
 
@@ -97,7 +96,7 @@ def login():
 @views.route("/logout")
 def logout():
     logout_user()
-    return redirect("/")
+    return redirect("/login")
 
 @views.route("/register", methods=["POST", "GET"])
 def register():
@@ -120,6 +119,7 @@ def register():
 
 #Shows all the users in the User table
 @views.route("/users", methods= ['GET', 'POST'])
+@login_required
 def users():
     users = User.query.all()
     usersString = ""
@@ -147,18 +147,18 @@ def deleteId(id):
 
 #Shows all the workouts in the Workout table
 #Gather the users and all the stored workouts to send to the workouts page
-@views.route("/workouts", defaults = {'username':None})
-@views.route("/workouts/<username>")
+@views.route("/workouts")
 @login_required
-def workouts(username):
-    
-    if username:
-        foundWorkouts = Workout.query.filter(Workout.username == username)
+def workouts():
+    cUser = getCurrentUser()
+    if cUser != None:
+        foundWorkouts = Workout.query.filter_by(username=cUser).all()
     else:
         foundWorkouts = Workout.query.all()
     users = User.query.all()
-    cUser = getCurrentUser()
-    return render_template("workouts.html", workouts = foundWorkouts, users=users, cUser = current_user.username)
+    
+
+    return render_template("workouts.html", workouts = foundWorkouts, users=users, cUser=cUser)
 
 @views.route("/info")
 def info():

@@ -18,7 +18,12 @@
    
     <div id="innerText">
     <h1>Workout Logger</h1>
+    {% if cUser == None %}
+    <h3>Welcome!</h3>
+    {% else %}
     <h3>Welcome, {{cUser}}</h3>
+    {% endif %}
+
     <p>Enter the workout you did below:
         <form id="form" action="#" method="post">
             <!-- <label for="username">Enter your name:</label><br>
